@@ -6,7 +6,7 @@ const $ = (id) => document.getElementById(id);
 const form = $("paste"), input = $("repo"), status = $("status"), frame = $("card");
 const picker = $("accent"), inkBtn = $("ink"), share = $("share"), copyBtn = $("copy"), contrast = $("contrast");
 const claimText = $("claim-text"), fafaBox = $("fafa"), fafaCopy = $("copy-fafa");
-let current = null; // { ref, card, fafaPath, description }
+let current = null; // { ref, card, fafaPath }
 
 async function json(url) {
   const r = await fetch(url, { headers: { Accept: "application/vnd.github+json" } });
@@ -47,7 +47,7 @@ async function load(ref) {
     },
     { escapeHtml },
   );
-  return { card, fafaPath: fafa && typeof fafa === "object" ? fafaPath : undefined, description: gh.description ?? undefined };
+  return { card, fafaPath: fafa && typeof fafa === "object" ? fafaPath : undefined };
 }
 
 // WCAG contrast of the accent against the light card (white) and the dark card.
@@ -81,13 +81,13 @@ function draw() {
     contrast.textContent = faint.length ? `This colour is faint on ${faint.join(" and on ")}. Text in it may be hard to read there.` : "";
   } else contrast.textContent = "";
   share.value = location.href;
-  const { ref, card: c, fafaPath, description } = current;
+  const { ref, card: c, fafaPath } = current;
   if (fafaPath) {
     claimText.textContent = `Claimed. The owner's .fafa is at ${fafaPath} in github.com/${ref.owner}/${ref.repo}.`;
     fafaBox.hidden = fafaCopy.hidden = true;
   } else {
     claimText.textContent = "Is this yours? Add this file to the repo at .well-known/fafa and the business card shows as claimed. Pick a colour above and it goes in the file too.";
-    fafaBox.textContent = fafaSnippet({ name: c.name, description, accent: shown });
+    fafaBox.textContent = fafaSnippet({ name: c.name, description: c.description, accent: shown });
     fafaBox.hidden = fafaCopy.hidden = false;
   }
   $("keep").hidden = false;

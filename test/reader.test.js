@@ -100,3 +100,10 @@ test("fafaSnippet: quoted values, colour only when chosen", () => {
   assert.equal(parseYaml(s).metadata.cards.accent, "#ff6600");
   assert.equal(parseYaml(fafaSnippet({ name: "x" })).metadata, undefined);
 });
+
+test("the .fafa gets the same description the business card prints, in full", () => {
+  const text = "Forecasts from the package description. Hourly detail, alerts and a week ahead.";
+  const c = card({ pkg: { name: "weather", description: text } });
+  assert.equal(c.description, text);
+  assert.equal(c.oneLiner, "Forecasts from the package description.");
+});

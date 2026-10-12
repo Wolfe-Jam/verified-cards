@@ -115,7 +115,7 @@ export function buildCard(src, { escapeHtml }) {
   return {
     name,
     title: version ? `${kind} · v${version}` : kind,
-    ...(description ? { oneLiner: oneLine(description) } : {}),
+    ...(description ? { oneLiner: oneLine(description), description } : {}), // description: the full text, for the .fafa
     domain,
     chips,
     tabs: [
