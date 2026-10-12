@@ -1,5 +1,8 @@
 # verified-cards
 
+> **Moved.** The page now lives in [agent-business-card](https://github.com/Wolfe-Jam/agent-business-card) at **[wolfe-jam.github.io/agent-business-card](https://wolfe-jam.github.io/agent-business-card/)**. Old links here forward there, `?repo=` included. This repo is archived.
+
+
 **Get your business card.** Paste a GitHub repo and see its business card: front and back, flip it, light or dark.
 
 **Try it:** https://wolfe-jam.github.io/verified-cards/
