@@ -4,73 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Get your business card</title>
-<meta name="description" content="Paste a GitHub repo and get its business card: front and back, flip, light or dark. Printed from the repo's own public files. Nothing guessed.">
-<style>
-:root{--bg:#fafaf7;--fg:#111;--muted:#5d6168;--line:#dcdcd6;--field:#fff;--accent:#111}
-@media (prefers-color-scheme:dark){:root{--bg:#0d0e10;--fg:#f2f2ee;--muted:#9a9ea6;--line:#2c2e33;--field:#17181b;--accent:#f2f2ee}}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 -apple-system,"Helvetica Neue",Inter,Arial,sans-serif}
-main{max-width:760px;margin:0 auto;padding:48px 16px 64px}
-h1{font-size:clamp(28px,6vw,40px);letter-spacing:-.02em;line-height:1.1;margin:0 0 8px}
-.lede{color:var(--muted);margin:0 0 28px}
-form{display:flex;gap:8px;flex-wrap:wrap}
-input[type=text]{flex:1 1 260px;min-width:0;padding:12px 14px;font:inherit;border:1.5px solid var(--line);border-radius:10px;background:var(--field);color:var(--fg)}
-button{padding:12px 18px;font:inherit;font-weight:700;border-radius:10px;border:1.5px solid var(--fg);background:var(--fg);color:var(--bg);cursor:pointer}
-button.ghost{background:transparent;color:var(--fg)}
-button:disabled{opacity:.4;cursor:default}
-.hint{color:var(--muted);font-size:14px;margin:8px 0 0}
-.hint a{color:inherit}
-#status{min-height:1.5em;margin:16px 0 0;color:var(--muted)}
-iframe{display:block;width:100%;height:620px;border:0;margin:8px 0 0;border-radius:14px}
-#keep{margin:24px 0 0;padding:20px;border:1.5px solid var(--line);border-radius:14px}
-#keep h2{font-size:18px;margin:0 0 12px}
-.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 12px}
-.row label{font-weight:700;min-width:64px}
-input[type=color]{width:48px;height:40px;padding:2px;border:1.5px solid var(--line);border-radius:8px;background:var(--field)}
-#share{flex:1 1 260px;min-width:0;padding:10px 12px;font:14px ui-monospace,Menlo,monospace;border:1.5px solid var(--line);border-radius:8px;background:var(--field);color:var(--fg)}
-#contrast{color:#b4561b;font-size:14px;margin:0}
-#keep h2.claim{margin:24px 0 4px}
-pre{margin:12px 0;padding:14px 16px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.5 ui-monospace,Menlo,monospace;background:var(--field);border:1.5px solid var(--line);border-radius:10px}
-footer{margin:40px 0 0;color:var(--muted);font-size:14px}
-footer a{color:inherit}
-</style>
+<meta http-equiv="refresh" content="0; url=https://wolfe-jam.github.io/agent-business-card/">
+<link rel="canonical" href="https://wolfe-jam.github.io/agent-business-card/">
+<script>location.replace("https://wolfe-jam.github.io/agent-business-card/" + location.search + location.hash);</script>
+<style>body{margin:0;padding:48px 16px;font:16px/1.5 -apple-system,"Helvetica Neue",Arial,sans-serif;background:#fafaf7;color:#111}@media (prefers-color-scheme:dark){body{background:#0d0e10;color:#f2f2ee}}a{color:inherit}</style>
 </head>
 <body>
-<main>
-  <h1>Get your business card</h1>
-  <p class="lede">Paste a GitHub repo. Its business card prints right here: front and back, flip it, light or dark. Every field comes from the repo's own public files. Nothing is guessed, and no colour means ink.</p>
-
-  <form id="paste">
-    <input id="repo" type="text" placeholder="owner/repo or a GitHub URL" autocomplete="off" spellcheck="false" aria-label="GitHub repository">
-    <button type="submit">Print it</button>
-  </form>
-  <p class="hint">Try <a href="?repo=modelcontextprotocol/typescript-sdk">modelcontextprotocol/typescript-sdk</a> or <a href="?repo=Wolfe-Jam/mcp-context-card">Wolfe-Jam/mcp-context-card</a>.</p>
-  <p id="status" role="status"></p>
-
-  <iframe id="card" title="The business card" hidden sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox"></iframe>
-
-  <section id="keep" hidden>
-    <h2>Make it yours</h2>
-    <div class="row">
-      <label for="accent">Colour</label>
-      <input id="accent" type="color" value="#0a0a0a">
-      <button id="ink" class="ghost" type="button">Ink</button>
-    </div>
-    <p id="contrast" role="status"></p>
-    <div class="row">
-      <label for="share">Share</label>
-      <input id="share" type="text" readonly>
-      <button id="copy" class="ghost" type="button">Copy link</button>
-    </div>
-    <p class="hint">The link prints the business card live from GitHub on every visit, so it never goes stale.</p>
-    <h2 class="claim">Claim it</h2>
-    <p id="claim-text" class="hint"></p>
-    <pre id="fafa" hidden></pre>
-    <button id="copy-fafa" class="ghost" type="button" hidden>Copy .fafa</button>
-  </section>
-
-  <footer>Printed by <a href="https://www.npmjs.com/package/agent-business-card">agent-business-card</a> (MIT), in your browser. No server, no sign-in. · <a href="https://github.com/Wolfe-Jam/verified-cards">Source</a></footer>
-</main>
-<script type="module" src="app.js"></script>
+<p>This page has moved to <a href="https://wolfe-jam.github.io/agent-business-card/">wolfe-jam.github.io/agent-business-card</a>.</p>
 </body>
 </html>
