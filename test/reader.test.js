@@ -82,3 +82,12 @@ test("oneLine cuts at a word, without rewording", () => {
 test("prints a complete page", () => {
   assert.match(renderBusinessCard(card({})), /^<!doctype html>/);
 });
+
+test("oneLine stops at a natural break before cutting", () => {
+  assert.equal(oneLine("Forecasts on request. Hourly detail and alerts."), "Forecasts on request.");
+  assert.equal(
+    oneLine("The essential MCP components for a project's context (AGENTS.md), cross-session memory, and identity — a base MCP on its own, or a drop-in extension."),
+    "The essential MCP components for a project's context (AGENTS.md), cross-session memory, and identity",
+  );
+  assert.equal(oneLine("v1.2. Short."), "v1.2. Short.");
+});
