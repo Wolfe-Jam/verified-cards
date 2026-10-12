@@ -126,3 +126,16 @@ export function buildCard(src, { escapeHtml }) {
     ...(str(cards.accent) ? { accent: str(cards.accent) } : {}),
   };
 }
+
+/**
+ * The .fafa an owner adds at .well-known/fafa to claim the business card. JSON
+ * strings are valid YAML double-quoted scalars, so every value is quoted safely.
+ * No colour means no metadata block: the business card prints in ink.
+ */
+export function fafaSnippet({ name, description, accent }) {
+  const q = (v) => JSON.stringify(String(v));
+  const lines = ['version: "1.0"', "agent:", `  name: ${q(name)}`];
+  if (description) lines.push(`  description: ${q(description)}`);
+  if (accent) lines.push("metadata:", "  cards:", `    accent: ${q(accent)}`);
+  return lines.join("\n") + "\n";
+}

@@ -1,11 +1,12 @@
 import { renderBusinessCard, escapeHtml, safeAccent } from "https://cdn.jsdelivr.net/npm/agent-business-card@0.1.1/+esm";
 import { parse as parseYaml } from "https://cdn.jsdelivr.net/npm/yaml@2.9.0/+esm";
-import { parseRepoInput, buildCard } from "./reader.js";
+import { parseRepoInput, buildCard, fafaSnippet } from "./reader.js";
 
 const $ = (id) => document.getElementById(id);
 const form = $("paste"), input = $("repo"), status = $("status"), frame = $("card");
 const picker = $("accent"), inkBtn = $("ink"), share = $("share"), copyBtn = $("copy"), contrast = $("contrast");
-let current = null; // { ref, card }
+const claimText = $("claim-text"), fafaBox = $("fafa"), fafaCopy = $("copy-fafa");
+let current = null; // { ref, card, fafaPath, description }
 
 async function json(url) {
   const r = await fetch(url, { headers: { Accept: "application/vnd.github+json" } });
@@ -33,18 +34,20 @@ async function load(ref) {
   ]);
   const fafaText = wk ?? af;
   const fafa = tryParse(parseYaml, fafaText);
-  return buildCard(
+  const fafaPath = wk !== undefined ? ".well-known/fafa" : af !== undefined ? "agent.fafa" : undefined;
+  const card = buildCard(
     {
       ref: { owner: gh.owner?.login ?? ref.owner, repo: gh.name ?? ref.repo },
       gh,
       release: rel?.tag_name,
       fafa: fafa && typeof fafa === "object" ? fafa : undefined,
-      fafaPath: wk !== undefined ? ".well-known/fafa" : af !== undefined ? "agent.fafa" : undefined,
+      fafaPath,
       serverJson: tryParse(JSON.parse, sj),
       pkg: tryParse(JSON.parse, pk),
     },
     { escapeHtml },
   );
+  return { card, fafaPath: fafa && typeof fafa === "object" ? fafaPath : undefined, description: gh.description ?? undefined };
 }
 
 // WCAG contrast of the accent against the light card (white) and the dark card.
@@ -78,6 +81,15 @@ function draw() {
     contrast.textContent = faint.length ? `This colour is faint on ${faint.join(" and on ")}. Text in it may be hard to read there.` : "";
   } else contrast.textContent = "";
   share.value = location.href;
+  const { ref, card: c, fafaPath, description } = current;
+  if (fafaPath) {
+    claimText.textContent = `Claimed. The owner's .fafa is at ${fafaPath} in github.com/${ref.owner}/${ref.repo}.`;
+    fafaBox.hidden = fafaCopy.hidden = true;
+  } else {
+    claimText.textContent = "Is this yours? Add this file to the repo at .well-known/fafa and the business card shows as claimed. Pick a colour above and it goes in the file too.";
+    fafaBox.textContent = fafaSnippet({ name: c.name, description, accent: shown });
+    fafaBox.hidden = fafaCopy.hidden = false;
+  }
   $("keep").hidden = false;
 }
 
@@ -92,8 +104,7 @@ async function show(text) {
   if (!ref) { status.textContent = "Paste owner/repo or a GitHub URL."; return; }
   status.textContent = `Reading github.com/${ref.owner}/${ref.repo}…`;
   try {
-    const card = await load(ref);
-    current = { ref, card };
+    current = { ref, ...(await load(ref)) };
     setUrl({ repo: `${ref.owner}/${ref.repo}` });
     status.textContent = "";
     draw();
@@ -108,6 +119,10 @@ inkBtn.addEventListener("click", () => { setUrl({ accent: current?.card.accent ?
 copyBtn.addEventListener("click", async () => {
   try { await navigator.clipboard.writeText(share.value); copyBtn.textContent = "Copied"; setTimeout(() => (copyBtn.textContent = "Copy link"), 1500); }
   catch { share.select(); }
+});
+fafaCopy.addEventListener("click", async () => {
+  try { await navigator.clipboard.writeText(fafaBox.textContent); fafaCopy.textContent = "Copied"; setTimeout(() => (fafaCopy.textContent = "Copy .fafa"), 1500); }
+  catch { getSelection().selectAllChildren(fafaBox); }
 });
 
 const start = new URLSearchParams(location.search).get("repo");

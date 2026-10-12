@@ -1,7 +1,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { escapeHtml, renderBusinessCard } from "agent-business-card";
-import { parseRepoInput, buildCard, oneLine } from "../reader.js";
+import { parse as parseYaml } from "yaml";
+import { parseRepoInput, buildCard, oneLine, fafaSnippet } from "../reader.js";
 
 const ref = { owner: "acme", repo: "weather" };
 const gh = { name: "weather", description: "Forecasts on request.", default_branch: "main", license: { spdx_id: "MIT" }, homepage: "", topics: ["mcp"] };
@@ -90,4 +91,12 @@ test("oneLine stops at a natural break before cutting", () => {
     "The essential MCP components for a project's context (AGENTS.md), cross-session memory, and identity",
   );
   assert.equal(oneLine("v1.2. Short."), "v1.2. Short.");
+});
+
+test("fafaSnippet: quoted values, colour only when chosen", () => {
+  const s = fafaSnippet({ name: 'my "server"', description: "Does: things", accent: "#ff6600" });
+  assert.equal(parseYaml(s).agent.name, 'my "server"');
+  assert.equal(parseYaml(s).agent.description, "Does: things");
+  assert.equal(parseYaml(s).metadata.cards.accent, "#ff6600");
+  assert.equal(parseYaml(fafaSnippet({ name: "x" })).metadata, undefined);
 });
