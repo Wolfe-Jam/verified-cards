@@ -1,0 +1,10 @@
+{
+  "name": "verified-cards",
+  "private": true,
+  "type": "module",
+  "description": "Get your business card: paste a GitHub repo and see its business card. A static page; package.json is only for the tests.",
+  "license": "MIT",
+  "engines": { "node": ">=22" },
+  "scripts": { "test": "node --test test/*.test.js" },
+  "devDependencies": { "agent-business-card": "0.1.0" }
+}

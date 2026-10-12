@@ -1,0 +1,41 @@
+{
+  "birthCertificate": {
+    "born": "2026-10-12T17:23:11.141Z",
+    "birthDNA": 50,
+    "birthDNASource": "init",
+    "projectDNA": "cc440427dbf03727",
+    "certificate": "FAF-2026-VERIFIED-4GUN"
+  },
+  "versions": [
+    {
+      "version": "v1.0.0",
+      "timestamp": "2026-10-12T17:23:11.141Z",
+      "score": 50,
+      "changes": [
+        "Birth — initial context"
+      ],
+      "growth": 0
+    }
+  ],
+  "current": {
+    "version": "v1.0.0",
+    "score": 50,
+    "lastSync": "2026-10-12T17:23:11.141Z"
+  },
+  "growth": {
+    "totalGrowth": 0,
+    "daysActive": 0,
+    "milestones": [
+      {
+        "type": "birth",
+        "score": 50,
+        "date": "2026-10-12T17:23:11.141Z",
+        "version": "v1.0.0",
+        "label": "Birth",
+        "emoji": "🐣"
+      }
+    ]
+  },
+  "lastModified": "2026-10-12T17:23:11.279Z",
+  "format": "faf-dna-v1"
+}

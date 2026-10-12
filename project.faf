@@ -1,0 +1,46 @@
+faf_version: "3.0"
+project:
+  name: verified-cards
+  goal: "Get your business card: paste a GitHub repo and see its business card, printed in the browser from the repo's own public files."
+  main_language: JavaScript
+  type: html  # found: index.html (vanilla, no frontend framework)
+stack:
+  frontend: slotignored
+  css_framework: slotignored
+  ui_library: slotignored
+  state_management: slotignored
+  backend: slotignored
+  api_type: slotignored
+  runtime: slotignored
+  database: slotignored
+  connection: slotignored
+  hosting: GitHub Pages — a static page, no server
+  build: none — plain ES modules served as-is; agent-business-card and yaml load from jsDelivr
+  cicd: GitHub Actions
+  monorepo_tool: slotignored
+  package_manager: slotignored
+  workspaces: slotignored
+  admin: slotignored
+  cache: slotignored
+  search: slotignored
+  storage: slotignored
+human_context:
+  who: Developers and maintainers of MCP servers, AI agents and their repos who want a business card a person can read, and visitors who want to see one.
+  what: "Get your business card: paste a GitHub repo and see its business card, printed in the browser from the repo's own public files."
+  why: Agent Cards and Server Cards are written for machines. This prints the same public facts as a business card people can look at, flip and share, and guesses nothing — no colour declared means ink.
+  where: https://wolfe-jam.github.io/verified-cards/ (the share link is ?repo=owner/name)
+  when: "2026-10-12"
+  how: "`index.html` and `app.js` fetch the files; `reader.js` decides what the business card says; [agent-business-card](https://www.npmjs.com/package/agent-business-card) prints it. `npm test` checks the reader."
+monorepo:
+  packages_count: slotignored
+  build_orchestrator: slotignored
+  versioning_strategy: slotignored
+  shared_configs: slotignored
+  remote_cache: slotignored
+tech_stack:
+  - JavaScript
+key_files:
+  - package.json
+  - README.md
+commands:
+  test: npm run test
