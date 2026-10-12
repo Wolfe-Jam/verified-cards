@@ -35,7 +35,13 @@ const httpUrl = (v) => {
 /** Cut a description to about one line for the front, at a word, without rewording it. */
 export function oneLine(text, max = 120) {
   const t = str(text)?.replace(/\s+/g, " ");
-  if (!t || t.length <= max) return t;
+  if (!t) return t;
+  // A natural break first: the end of the first sentence, then a " — " aside.
+  const sentence = t.match(/^.{20,}?[.!?](?=\s|$)/)?.[0];
+  if (sentence && sentence.length <= max) return sentence;
+  const dash = t.indexOf(" — ");
+  if (dash >= 20 && dash <= max) return t.slice(0, dash);
+  if (t.length <= max) return t;
   const cut = t.slice(0, max);
   return cut.slice(0, Math.max(cut.lastIndexOf(" "), 40)).replace(/[\s,;:.—-]+$/, "") + "…";
 }

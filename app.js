@@ -71,9 +71,11 @@ function draw() {
   const shown = accent === "ink" ? undefined : accent ?? safeAccent(current.card.accent);
   picker.value = shown && /^#[0-9a-f]{6}$/i.test(shown) ? shown : "#0a0a0a";
   inkBtn.disabled = !shown;
-  if (shown && /^#[0-9a-f]{3}([0-9a-f]{3})?$/i.test(shown)) {
-    const low = Math.min(ratio(shown, "#ffffff"), ratio(shown, "#0a0a0a"));
-    contrast.textContent = low < 3 ? "This colour is hard to read on a light or dark card. A deeper or brighter shade reads better." : "";
+  // Only for a colour picked here: the owner's own declared colour is theirs to choose.
+  if (accent && accent !== "ink" && /^#[0-9a-f]{3}([0-9a-f]{3})?$/i.test(accent)) {
+    const onLight = ratio(accent, "#ffffff"), onDark = ratio(accent, "#0a0a0a");
+    const faint = [onLight < 3 && `a light card (${onLight.toFixed(1)}:1)`, onDark < 3 && `a dark card (${onDark.toFixed(1)}:1)`].filter(Boolean);
+    contrast.textContent = faint.length ? `This colour is faint on ${faint.join(" and on ")}. Text in it may be hard to read there.` : "";
   } else contrast.textContent = "";
   share.value = location.href;
   $("keep").hidden = false;
