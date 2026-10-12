@@ -6,5 +6,5 @@
   "license": "MIT",
   "engines": { "node": ">=22" },
   "scripts": { "test": "node --test test/*.test.js" },
-  "devDependencies": { "agent-business-card": "0.1.0" }
+  "devDependencies": { "agent-business-card": "0.1.1" }
 }
